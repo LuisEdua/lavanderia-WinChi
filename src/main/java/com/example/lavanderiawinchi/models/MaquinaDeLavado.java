@@ -3,13 +3,13 @@ package com.example.lavanderiawinchi.models;
 public class MaquinaDeLavado {
 
     private boolean funcional;
-    private boolean ocupada;
+    private boolean libre;
     private int posicionX;
     private int posicionY;
 
     public MaquinaDeLavado(int posicionX, int posicionY){
         this.funcional = true;
-        this.ocupada = true;
+        this.libre = true;
         this.posicionX = posicionX;
         this.posicionY = posicionY;
     }
@@ -22,12 +22,12 @@ public class MaquinaDeLavado {
         this.funcional = funcional;
     }
 
-    public boolean isOcupada() {
-        return ocupada;
+    public boolean isLibre() {
+        return libre;
     }
 
-    public void setOcupada(boolean ocupada) {
-        this.ocupada = ocupada;
+    public void setLibre(boolean libre) {
+        this.libre = libre;
     }
 
     public int getPosicionX() {

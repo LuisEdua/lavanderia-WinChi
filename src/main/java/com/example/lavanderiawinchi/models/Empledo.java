@@ -1,13 +1,15 @@
 package com.example.lavanderiawinchi.models;
 
+import java.util.Random;
+
 public class Empledo {
 
     public boolean disponible;
-    public int maquinaEnReparacion;
+    public MaquinaDeLavado maquinaEnReparacion;
 
     public Empledo(){
         this.disponible = true;
-        this.maquinaEnReparacion = -1;
+        this.maquinaEnReparacion = null;
     }
 
     public boolean isDisponible(){
@@ -18,12 +20,29 @@ public class Empledo {
         this.disponible = disponible;
     }
 
-    public int getMaquinaEnReparacion(){
+    public MaquinaDeLavado getMaquinaEnReparacion(){
         return maquinaEnReparacion;
     }
 
-    public void setMaquinaEnReparacion(int maquinaEnReparacion){
+    public void setMaquinaEnReparacion(MaquinaDeLavado maquinaEnReparacion){
         this.maquinaEnReparacion = maquinaEnReparacion;
     }
 
+    public void asignarMaquina(Cliente c, MaquinaDeLavado[] maquinas) {
+        MaquinaDeLavado maquina = buscarMaquina(maquinas);
+        maquina.setLibre(false);
+        c.setMaquinaAsignada(maquina);
+    }
+
+    private MaquinaDeLavado buscarMaquina(MaquinaDeLavado[] maquinas){
+        Random random = new Random();
+        MaquinaDeLavado maquinaSeleccionada = null;
+        while (maquinaSeleccionada == null){
+            MaquinaDeLavado maquina = maquinas[random.nextInt(20)];
+            if(maquina.isLibre()){
+                maquinaSeleccionada = maquina;
+            }
+        }
+        return maquinaSeleccionada;
+    }
 }

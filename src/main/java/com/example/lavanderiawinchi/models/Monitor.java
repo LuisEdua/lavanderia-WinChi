@@ -17,4 +17,16 @@ public class Monitor {
         this.capacidad=20;
     }
 
+    public synchronized void entradaCliente(){
+        while(capacidad == 0 && !e.isDisponible()) {
+            try {
+                this.wait();
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        e.setDisponible(false);
+        e.asignarMaquina(c, maquinas);
+    }
+
 }
