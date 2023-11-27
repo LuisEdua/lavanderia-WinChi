@@ -42,19 +42,21 @@ public class HiloCliente extends Observable implements Runnable{
     }
 
     private void rutina(int indice) {
+        HiloEmpleado h2 = new HiloEmpleado(m);
+
         entrada(indice);
         lavar(indice);
-        irse(indice);
         salir(indice);
+        irse(indice);
     }
 
-    private void salir(int i) {
-        Cliente cliente = m.clientes[i];
+    private void irse(int i) {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        Cliente cliente = m.clientes[i];
         m.salidaCliente(i);
         cliente.setIrse(true);
         Platform.runLater(() -> {
@@ -62,14 +64,12 @@ public class HiloCliente extends Observable implements Runnable{
             this.notifyObservers(cliente);
         });
         m.clientes[i]=null;
-        System.out.println("Se fue");
     }
 
-    private void irse(int i) {
-        System.out.println("Saliendo");
+    private void salir(int i) {
         Cliente cliente = m.clientes[i];
-        cliente.setPosicionX(195);
-        cliente.setPosicionY(215);
+        cliente.setPosicionX(-10);
+        cliente.setPosicionY(-20);
         Platform.runLater(() -> {
             this.setChanged();
             this.notifyObservers(cliente);
@@ -78,7 +78,6 @@ public class HiloCliente extends Observable implements Runnable{
 
     private void lavar(int i) {
         Cliente c = m.clientes[i];
-        System.out.println("Lavando");
         try {
             Thread.sleep(c.getTiempoDeLavado());
         } catch (InterruptedException e) {
@@ -105,7 +104,6 @@ public class HiloCliente extends Observable implements Runnable{
             this.setChanged();
             this.notifyObservers(c);
         });
-        System.out.println("Entro");
     }
 
     public void generarClientes(int i){

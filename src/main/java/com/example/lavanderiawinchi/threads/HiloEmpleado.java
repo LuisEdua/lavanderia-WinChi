@@ -13,7 +13,9 @@ public class HiloEmpleado extends Observable implements Runnable {
 
     @Override
     public void run() {
-        repararMaquina();
+        if (monitor.e.maquinaEnReparacion != null){
+            repararMaquina();
+        }
     }
 
     private void repararMaquina() {
