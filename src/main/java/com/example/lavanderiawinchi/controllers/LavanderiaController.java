@@ -5,6 +5,7 @@ import com.example.lavanderiawinchi.models.Empleado;
 import com.example.lavanderiawinchi.models.MaquinaDeLavado;
 import com.example.lavanderiawinchi.models.Monitor;
 import com.example.lavanderiawinchi.threads.HiloCliente;
+import com.example.lavanderiawinchi.threads.HiloEmpleado;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -36,7 +37,11 @@ public class LavanderiaController {
 
         panel.getChildren().add(e.getCircle());
 
-        HiloCliente h1 = new HiloCliente(monitor, panel);
+        HiloEmpleado hiloEmpleado = new HiloEmpleado(monitor);
+        EmpleadoController empleadoController = new EmpleadoController(panel);
+        hiloEmpleado.addObserver(empleadoController);
+
+        HiloCliente h1 = new HiloCliente(monitor, hiloEmpleado);
         ClienteController clienteController = new ClienteController(panel);
         h1.addObserver(clienteController);
 

@@ -16,13 +16,13 @@ public class HiloCliente extends Observable implements Runnable{
 
 
     private Random random = new Random();
-    private AnchorPane panel;
+    private HiloEmpleado hiloEmpleado;
 
     ExecutorService executor = Executors.newFixedThreadPool(30);
 
-    public HiloCliente(Monitor m, AnchorPane p){
+    public HiloCliente(Monitor m, HiloEmpleado h1){
         this.m = m;
-        this.panel = p;
+        this.hiloEmpleado = h1;
     }
 
 
@@ -67,10 +67,7 @@ public class HiloCliente extends Observable implements Runnable{
             this.notifyObservers(cliente);
         });
         m.clientes[i]=null;
-        EmpleadoController empleadoController = new EmpleadoController(panel);
-        HiloEmpleado h2 = new HiloEmpleado(m);
-        h2.addObserver(empleadoController);
-        Thread h = new Thread(h2);
+        Thread h = new Thread(hiloEmpleado);
         h.start();
     }
 
@@ -91,7 +88,7 @@ public class HiloCliente extends Observable implements Runnable{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        int probabilidad = random.nextInt(50);
+        int probabilidad = random.nextInt(4);
         if (probabilidad == 1){
             c.maquinaAsignada.setFuncional(false);
         }
