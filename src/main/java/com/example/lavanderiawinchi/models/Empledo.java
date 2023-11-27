@@ -52,6 +52,8 @@ public class Empledo {
         MaquinaDeLavado maquina = buscarMaquina(maquinas);
         maquina.setLibre(false);
         c.setMaquinaAsignada(maquina);
+        c.setPosicionX(maquina.getPosicionX());
+        c.setPosicionY(maquina.getPosicionY());
     }
 
     private MaquinaDeLavado buscarMaquina(MaquinaDeLavado[] maquinas){
