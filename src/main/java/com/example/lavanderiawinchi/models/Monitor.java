@@ -44,4 +44,11 @@ public class Monitor {
         this.notifyAll();
     }
 
+    public synchronized void repararMaquina() {
+        e.setDisponible(false);
+        e.repararMaquina();
+        e.setDisponible(true);
+        this.notifyAll();
+    }
 }
+

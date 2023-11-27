@@ -1,8 +1,10 @@
 package com.example.lavanderiawinchi.threads;
 
+import com.example.lavanderiawinchi.controllers.EmpleadoController;
 import com.example.lavanderiawinchi.models.Cliente;
 import com.example.lavanderiawinchi.models.Monitor;
 import javafx.application.Platform;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.Observable;
 import java.util.Random;
@@ -14,11 +16,13 @@ public class HiloCliente extends Observable implements Runnable{
 
 
     private Random random = new Random();
+    private AnchorPane panel;
 
     ExecutorService executor = Executors.newFixedThreadPool(30);
 
-    public HiloCliente(Monitor m){
+    public HiloCliente(Monitor m, AnchorPane p){
         this.m = m;
+        this.panel = p;
     }
 
 
@@ -42,7 +46,6 @@ public class HiloCliente extends Observable implements Runnable{
     }
 
     private void rutina(int indice) {
-        HiloEmpleado h2 = new HiloEmpleado(m);
 
         entrada(indice);
         lavar(indice);
@@ -64,6 +67,11 @@ public class HiloCliente extends Observable implements Runnable{
             this.notifyObservers(cliente);
         });
         m.clientes[i]=null;
+        EmpleadoController empleadoController = new EmpleadoController(panel);
+        HiloEmpleado h2 = new HiloEmpleado(m);
+        h2.addObserver(empleadoController);
+        Thread h = new Thread(h2);
+        h.start();
     }
 
     private void salir(int i) {
@@ -83,7 +91,8 @@ public class HiloCliente extends Observable implements Runnable{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        if (random.nextInt(100) == 1){
+        int probabilidad = random.nextInt(50);
+        if (probabilidad == 1){
             c.maquinaAsignada.setFuncional(false);
         }
     }

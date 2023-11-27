@@ -32,9 +32,11 @@ public class LavanderiaController {
         circle.setLayoutX(e.getPosicionX());
         circle.setLayoutY(e.getPosicionY());
 
-        panel.getChildren().add(circle);
+        e.setCircle(circle);
 
-        HiloCliente h1 = new HiloCliente(monitor);
+        panel.getChildren().add(e.getCircle());
+
+        HiloCliente h1 = new HiloCliente(monitor, panel);
         ClienteController clienteController = new ClienteController(panel);
         h1.addObserver(clienteController);
 

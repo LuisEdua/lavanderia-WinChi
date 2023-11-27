@@ -1,5 +1,7 @@
 package com.example.lavanderiawinchi.models;
 
+import javafx.scene.shape.Circle;
+
 import java.util.Random;
 
 public class Empleado {
@@ -8,6 +10,7 @@ public class Empleado {
     public MaquinaDeLavado maquinaEnReparacion;
     private int posicionX;
     private int posicionY;
+    private Circle circle;
 
     Random random = new Random();
 
@@ -40,6 +43,7 @@ public class Empleado {
 
     public void setPosicionX(int posicionX) {
         this.posicionX = posicionX;
+        this.circle.setLayoutX(posicionX);
     }
 
     public int getPosicionY() {
@@ -48,6 +52,15 @@ public class Empleado {
 
     public void setPosicionY(int posicionY) {
         this.posicionY = posicionY;
+        this.circle.setLayoutY(posicionY);
+    }
+
+    public void setCircle(Circle circle){
+        this.circle = circle;
+    }
+
+    public Circle getCircle(){
+        return circle;
     }
 
     public void asignarMaquina(Cliente c, MaquinaDeLavado[] maquinas) {
