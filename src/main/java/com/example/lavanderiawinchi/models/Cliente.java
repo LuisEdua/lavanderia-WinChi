@@ -4,6 +4,8 @@ public class Cliente {
 
     public MaquinaDeLavado maquinaAsignada;
     public int tiempoDeLavado;
+    public int posicionX;
+    public int posicionY;
 
     public Cliente(int tL){
         this.maquinaAsignada = null;
@@ -20,5 +22,21 @@ public class Cliente {
 
     public int getTiempoDeLavado(){
         return tiempoDeLavado;
+    }
+
+    public void setPosicionX(int p){
+        this.posicionX = p;
+    }
+
+    public int getPosicionX(){
+        return posicionX;
+    }
+
+    public void setPosicionY(int p){
+        this.posicionY = p;
+    }
+
+    public int getPosicionY(){
+        return posicionY;
     }
 }

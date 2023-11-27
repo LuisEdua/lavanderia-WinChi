@@ -6,10 +6,14 @@ public class Empledo {
 
     public boolean disponible;
     public MaquinaDeLavado maquinaEnReparacion;
+    private int posicionX;
+    private int posicionY;
 
-    public Empledo(){
+    public Empledo(int px, int py){
         this.disponible = true;
         this.maquinaEnReparacion = null;
+        this.posicionX = px;
+        this.posicionY = py;
     }
 
     public boolean isDisponible(){
@@ -26,6 +30,22 @@ public class Empledo {
 
     public void setMaquinaEnReparacion(MaquinaDeLavado maquinaEnReparacion){
         this.maquinaEnReparacion = maquinaEnReparacion;
+    }
+
+    public int getPosicionX() {
+        return posicionX;
+    }
+
+    public void setPosicionX(int posicionX) {
+        this.posicionX = posicionX;
+    }
+
+    public int getPosicionY() {
+        return posicionY;
+    }
+
+    public void setPosicionY(int posicionY) {
+        this.posicionY = posicionY;
     }
 
     public void asignarMaquina(Cliente c, MaquinaDeLavado[] maquinas) {

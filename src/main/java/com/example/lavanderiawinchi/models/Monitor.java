@@ -4,20 +4,19 @@ public class Monitor {
 
     private int capacidad;
 
-    private MaquinaDeLavado[] maquinas = new MaquinaDeLavado[20];
+    public MaquinaDeLavado[] maquinas;
+    public Cliente[] clientes;
 
-    private Cliente c;
-    private Empledo e;
-    private MaquinaDeLavado m;
+    public Empledo e;
 
-    public Monitor(Cliente c, Empledo e, MaquinaDeLavado m){
-        this.c=c;
+    public Monitor(Cliente[] c, Empledo e, MaquinaDeLavado[] m){
+        this.clientes=c;
         this.e=e;
-        this.m=m;
+        this.maquinas=m;
         this.capacidad=20;
     }
 
-    public synchronized void entradaCliente(){
+    public synchronized void entradaCliente(int i){
         while(capacidad == 0 && !e.isDisponible()) {
             try {
                 this.wait();
@@ -26,7 +25,7 @@ public class Monitor {
             }
         }
         e.setDisponible(false);
-        e.asignarMaquina(c, maquinas);
+        e.asignarMaquina(clientes[i], maquinas);
     }
 
 }

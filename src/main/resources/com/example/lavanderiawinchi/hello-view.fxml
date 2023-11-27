@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lavanderiawinchi.controllers.LavanderiaController">
+<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lavanderiawinchi.controllers.LavanderiaController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fff8437" height="377.0" layoutX="141.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" width="614.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b0ff1f63" height="377.0" layoutX="141.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" width="97.0" />
@@ -28,8 +29,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="432.0" layoutY="326.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="507.0" layoutY="326.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="60.0" layoutX="582.0" layoutY="326.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-      <Circle fx:id="empleado" fill="#ffdf1f" layoutX="217.0" layoutY="203.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Line endY="60.0" layoutX="146.0" layoutY="170.0" stroke="WHITE" strokeWidth="10.0" />
-      <Button layoutX="14.0" layoutY="26.0" mnemonicParsing="false" text="Iniciar" />
+      <Button layoutX="14.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#onClickButtonController" text="Iniciar" />
    </children>
 </AnchorPane>
