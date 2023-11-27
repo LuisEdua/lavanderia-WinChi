@@ -1,7 +1,7 @@
 package com.example.lavanderiawinchi.controllers;
 
 import com.example.lavanderiawinchi.models.Cliente;
-import com.example.lavanderiawinchi.models.Empledo;
+import com.example.lavanderiawinchi.models.Empleado;
 import com.example.lavanderiawinchi.models.MaquinaDeLavado;
 import com.example.lavanderiawinchi.models.Monitor;
 import com.example.lavanderiawinchi.threads.HiloCliente;
@@ -22,7 +22,7 @@ public class LavanderiaController {
     protected void onClickButtonController() {
         Cliente[] c = new Cliente[100];
         MaquinaDeLavado[] m = generarMaquinas();
-        Empledo e = new Empledo(217, 203);
+        Empleado e = new Empleado(217, 203);
         Monitor monitor = new Monitor(c, e, m);
 
         circle.setFill(Color.web("#ffdf1f"));

@@ -18,9 +18,15 @@ public class ClienteController implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         Cliente c = (Cliente) o;
-        if(c.getCircle().getParent() != null){
-            ((Pane)c.getCircle().getParent()).getChildren().remove(c.getCircle());
+        if(c != null){
+            if (!c.getIrse()){
+                if(c.getCircle().getParent() != null){
+                    ((Pane)c.getCircle().getParent()).getChildren().remove(c.getCircle());
+                }
+                panel.getChildren().add(c.getCircle());
+            } else {
+                ((Pane)c.getCircle().getParent()).getChildren().remove(c.getCircle());
+            }
         }
-        panel.getChildren().add(c.getCircle());
     }
 }

@@ -12,6 +12,9 @@ import java.util.concurrent.Executors;
 public class HiloCliente extends Observable implements Runnable{
     public Monitor m;
 
+
+    private Random random = new Random();
+
     ExecutorService executor = Executors.newFixedThreadPool(30);
 
     public HiloCliente(Monitor m){
@@ -27,7 +30,7 @@ public class HiloCliente extends Observable implements Runnable{
             executor.submit(new Runnable() {
                 @Override
                 public void run() {
-                    entrada(indice);
+                    rutina(indice);
                 }
             });
             try {
@@ -35,6 +38,54 @@ public class HiloCliente extends Observable implements Runnable{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    private void rutina(int indice) {
+        entrada(indice);
+        lavar(indice);
+        irse(indice);
+        salir(indice);
+    }
+
+    private void salir(int i) {
+        Cliente cliente = m.clientes[i];
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        m.salidaCliente(i);
+        cliente.setIrse(true);
+        Platform.runLater(() -> {
+            this.setChanged();
+            this.notifyObservers(cliente);
+        });
+        m.clientes[i]=null;
+        System.out.println("Se fue");
+    }
+
+    private void irse(int i) {
+        System.out.println("Saliendo");
+        Cliente cliente = m.clientes[i];
+        cliente.setPosicionX(195);
+        cliente.setPosicionY(215);
+        Platform.runLater(() -> {
+            this.setChanged();
+            this.notifyObservers(cliente);
+        });
+    }
+
+    private void lavar(int i) {
+        Cliente c = m.clientes[i];
+        System.out.println("Lavando");
+        try {
+            Thread.sleep(c.getTiempoDeLavado());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if (random.nextInt(100) == 1){
+            c.maquinaAsignada.setFuncional(false);
         }
     }
 
@@ -50,12 +101,14 @@ public class HiloCliente extends Observable implements Runnable{
             throw new RuntimeException(e);
         }
         m.entradaCliente(i);
-        this.setChanged();
-        this.notifyObservers(c);
+        Platform.runLater(() -> {
+            this.setChanged();
+            this.notifyObservers(c);
+        });
+        System.out.println("Entro");
     }
 
     public void generarClientes(int i){
-        Random random = new Random();
         Cliente c = new Cliente(random.nextInt(5000) + 5000,195, 203 );
         m.clientes[i]=c;
     }

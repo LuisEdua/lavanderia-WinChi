@@ -7,9 +7,9 @@ public class Monitor {
     public MaquinaDeLavado[] maquinas;
     public Cliente[] clientes;
 
-    public Empledo e;
+    public Empleado e;
 
-    public Monitor(Cliente[] c, Empledo e, MaquinaDeLavado[] m){
+    public Monitor(Cliente[] c, Empleado e, MaquinaDeLavado[] m){
         this.clientes=c;
         this.e=e;
         this.maquinas=m;
@@ -17,7 +17,7 @@ public class Monitor {
     }
 
     public synchronized void entradaCliente(int i){
-        while(capacidad == 0 && !e.isDisponible()) {
+        while(capacidad == 0 || !e.isDisponible() || e.getMaquinaEnReparacion() != null) {
             try {
                 this.wait();
             } catch (InterruptedException ex) {
@@ -26,6 +26,22 @@ public class Monitor {
         }
         e.setDisponible(false);
         e.asignarMaquina(clientes[i], maquinas);
+        e.setDisponible(true);
+        this.notifyAll();
+    }
+
+    public synchronized void salidaCliente(int i){
+        while (!e.isDisponible() || e.getMaquinaEnReparacion() != null){
+            try {
+                this.wait();
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        e.setDisponible(false);
+        e.verificar(clientes[i]);
+        e.setDisponible(true);
+        this.notifyAll();
     }
 
 }

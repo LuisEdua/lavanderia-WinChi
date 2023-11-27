@@ -10,6 +10,7 @@ public class Cliente {
     public int posicionX;
     public int posicionY;
     public Circle circle;
+    private boolean irse;
 
     public Cliente(int tL, int px, int py){
         this.maquinaAsignada = null;
@@ -18,6 +19,7 @@ public class Cliente {
         this.posicionY=py;
         this.circle = new Circle(px, py, 10);
         this.circle.setFill(Color.RED);
+        this.irse = false;
     }
 
     public MaquinaDeLavado getMaquinaAsignada(){
@@ -37,20 +39,25 @@ public class Cliente {
         this.circle.setLayoutX(p);
     }
 
-    public int getPosicionX(){
-        return posicionX;
-    }
-
     public void setPosicionY(int p){
         this.posicionY = p;
         this.circle.setLayoutY(p);
     }
 
-    public int getPosicionY(){
-        return posicionY;
+    public void setCircle(Circle circle){
+        this.circle=circle;
+        this.circle=circle;
     }
 
     public Circle getCircle() {
         return circle;
+    }
+
+    public void setIrse(boolean irse){
+        this.irse=irse;
+    }
+
+    public boolean getIrse(){
+        return irse;
     }
 }

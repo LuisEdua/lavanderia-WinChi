@@ -2,14 +2,16 @@ package com.example.lavanderiawinchi.models;
 
 import java.util.Random;
 
-public class Empledo {
+public class Empleado {
 
     public boolean disponible;
     public MaquinaDeLavado maquinaEnReparacion;
     private int posicionX;
     private int posicionY;
 
-    public Empledo(int px, int py){
+    Random random = new Random();
+
+    public Empleado(int px, int py){
         this.disponible = true;
         this.maquinaEnReparacion = null;
         this.posicionX = px;
@@ -57,14 +59,32 @@ public class Empledo {
     }
 
     private MaquinaDeLavado buscarMaquina(MaquinaDeLavado[] maquinas){
-        Random random = new Random();
         MaquinaDeLavado maquinaSeleccionada = null;
         while (maquinaSeleccionada == null){
             MaquinaDeLavado maquina = maquinas[random.nextInt(20)];
-            if(maquina.isLibre()){
+            if(maquina.isLibre() && maquina.isFuncional()){
                 maquinaSeleccionada = maquina;
             }
         }
         return maquinaSeleccionada;
+    }
+
+    public void verificar(Cliente cliente) {
+        MaquinaDeLavado maquina = cliente.maquinaAsignada;
+        if (!maquina.isFuncional()){
+            this.maquinaEnReparacion = maquina;
+        }
+        cliente.maquinaAsignada = null;
+        maquina.setLibre(true);
+    }
+
+    public void repararMaquina() {
+        try {
+            Thread.sleep(random.nextInt(1000)+2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        this.maquinaEnReparacion.setFuncional(true);
+        this.maquinaEnReparacion=null;
     }
 }
