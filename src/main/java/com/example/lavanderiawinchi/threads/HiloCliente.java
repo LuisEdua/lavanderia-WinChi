@@ -18,7 +18,7 @@ public class HiloCliente extends Observable implements Runnable{
     private Random random = new Random();
     private HiloEmpleado hiloEmpleado;
 
-    ExecutorService executor = Executors.newFixedThreadPool(30);
+    ExecutorService executor = Executors.newFixedThreadPool(100);
 
     public HiloCliente(Monitor m, HiloEmpleado h1){
         this.m = m;
@@ -28,7 +28,7 @@ public class HiloCliente extends Observable implements Runnable{
 
     @Override
     public void run() {
-        for (int i = 0; i<30; i++){
+        for (int i = 0; i<100; i++){
             final int indice = i;
             generarClientes(indice);
             executor.submit(new Runnable() {
